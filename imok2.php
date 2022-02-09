@@ -29,6 +29,7 @@ class imok {
 	public $plugin_name;
 
 	function __construct() {
+		$this->plugin_name = plugin_basename( __FILE__ );
 		require_once plugin_dir_path(__file__) . 'inc/imok_plugin_activate.php' ;
 		require_once plugin_dir_path(__file__) . 'inc/imok_plugin_activate.php' ;
 		//register_activation_hook( __file__ , array( $this , 'activate') );
@@ -41,25 +42,28 @@ class imok {
 		//register_deactivation_hook( __file__ , array( $this , 'deactivate') );
 
 		add_action( 'init' , array( $this , 'custom_post_type') );
+
 		add_action( 'admin_menu' , array( $this , 'add_admin_pages') );
-		add_filter( 'plugin_action_link_NAME-OF-MY-PLUGIN' , array($this , 'settings_link') );
+		add_filter( "plugin_action_links_$this->plugin_name" , array($this , 'settings_link') );
+
 		$this->enqueue();
+	}
+
+
+	function add_admin_pages(){
+		add_menu_page( 'imok Plugin' , 'imok' , 'manage_options' , 'imok_plugin' , array($this,'admin_index') , 'dashicons-store' , 110 );
+	}
+
+	function admin_index(){
+		require_once plugin_dir_path(__file__) . 'templates/admin.php' ;
+
 	}
 
 	function settings_link($links){
 		//add custom settings link
-
-
-	}
-
-	function add_admin_pages(){
-		add_menu_page( 'imok Plugin' , 'imok' , 'manage_options' , 'imok_plugin' , array($this,'admin_index') , 'dashicons-store' , 110 );
-
-	}
-
-	function admin_index(){
-		//require template
-		require_once plugin_dir_path(__file__) . 'templates/admin.php' ;
+		$settings_link = '<a href="admin.php?imok_plugin">uSettings</a>';
+		array_push($links , $settings_link);
+		return $links;
 	}
 
 	/*
