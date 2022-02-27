@@ -12,7 +12,7 @@ class activate{
 
 }
 
-register_activation_hook( imok_PLUGIN_FILE_FULL_PATH , array( 'activate' , 'activate_plugin') );
+register_activation_hook( IMOK_PLUGIN_PATH_AND_FILENAME , array( 'activate' , 'activate_plugin') );
 
 add_action( 'init' , 'activate::custom_post_type' );
 

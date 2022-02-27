@@ -1,4 +1,2 @@
-<h1>imok Plugin</h1>
-
-<?php
+<h1>imok Plugin Admin</h1>
 

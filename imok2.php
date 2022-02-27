@@ -1,12 +1,14 @@
 <?php
 /**
 * Plugin Name: imok2
-* Plugin URI: http://home/wordpress/imok
-* Description: This is the very first plugin I ever created.
+* Plugin URI: http://home/wordpress
+* Description: IMOK for WP.
 * Version: 1.0
-* Author: Vinman
+* Author: The Vinman
 * Author URI: https://www.emogic.com/
 **/
+
+//XDEBUG_SESSION_START=1
 
 // Enable WP_DEBUG mode
 //define( 'WP_DEBUG', true );
@@ -21,25 +23,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // define variable for path to this plugin file.
-define( 'imok_PLUGIN_FILE_FULL_PATH' , __file__ );
-define( 'imok_LOCATION', dirname( __FILE__ ) );
-define( 'imok_LOCATION_URL', plugins_url( '', __FILE__ ) );
-define( 'imok_PLUGIN_NAME' , plugin_basename( __FILE__ ) );
+define( 'IMOK_PLUGIN_PATH_AND_FILENAME' , __file__ ); // c:\*********\imok2\imok.php
+define( 'IMOK_PLUGIN_PATH', dirname( __FILE__ ) ); // c:\************\imok2\
+define( 'IMOK_PLUGIN_LOCATION_URL', plugins_url( '', __FILE__ ) ); // http://home/wordpress/wp-content/plugins/imok2
+define( 'IMOK_PLUGIN_NAME' , plugin_basename( __FILE__ ) ); // imok2
 
 class imok {
-	//public $plugin_name;
 
 	function __construct() {
 
-		require_once plugin_dir_path(__file__) . 'inc/activate.php' ;
-		require_once plugin_dir_path(__file__) . 'inc/deactivate.php' ;
-		require_once plugin_dir_path(__file__) . 'inc/admin.php' ;
+		require_once plugin_dir_path(__file__) . 'inc/activate.php' ; //flush , custom post (temp)
+		require_once plugin_dir_path(__file__) . 'inc/deactivate.php' ; //flush , custom post (temp)
+		require_once plugin_dir_path(__file__) . 'inc/admin.php' ;//add admin page (?empty) , settings links , MOVE TO imok/settings add meta type , user fields , user field write
+		require_once plugin_dir_path(__file__) . 'inc/enqueue.php' ;//add js and styles : none
 
-		$this->enqueue();
-	}
-
-	function enqueue(){
-		wp_enqueue_script('imokscript' , plugins_url('/assets/imok.js' , __FILE__));
 	}
 
 }

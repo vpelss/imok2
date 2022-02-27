@@ -8,4 +8,4 @@ class deactivate{
 
 }
 
-register_activation_hook( imok_PLUGIN_FILE_FULL_PATH , array( 'deactivate' , 'deactivate_plugin') );
+register_activation_hook( IMOK_PLUGIN_PATH_AND_FILENAME , array( 'deactivate' , 'deactivate_plugin') );
